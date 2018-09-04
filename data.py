@@ -46,7 +46,7 @@ def get_flux(input_file, planet_name, epoch):
     for i in range(len(flux_vector)):
         flux.append(flux_vector[i].n)
         error.append(flux_vector[i].s)
-    np.savetxt(planet_name + "_" + epoch + ".txt", np.array([date, flux, error]).T, delimiter=" ")
+    np.savetxt(planet_name + "_" + epoch + ".txt", np.array([date, flux, error]).T, delimiter = " ")
 
 def build_txt(time,flux,error, file_name):
     fmt = "%.10f, %.10f, %.10f"
