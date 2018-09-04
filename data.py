@@ -5,6 +5,7 @@ import csv
 import numpy as np
 from astropy import time, coordinates as coo, units as u
 import matplotlib
+import uncertainties
 
 def dat_to_txt(input_file):
     data = pd.read_csv(input_file, sep=" ", usecols=[0,1,2])
@@ -56,16 +57,16 @@ def get_bjd_tdb(time_utc, target, obs):
     if target == "WASP19":
         tg = coo.SkyCoord("09:53:40.007","-45:39:33.06", unit=(u.hourangle,u.deg), frame= "icrs")
     if target == "WASP18":
-        tg = coord.SkyCoord("01:37:25.0332","-45:40:40.373", unit=(u.hourangle,u.deg), frame="icrs")
+        tg = coo.SkyCoord("01:37:25.0332","-45:40:40.373", unit=(u.hourangle,u.deg), frame="icrs")
     if target == "WASP77":
-        tg = coord.SkyCoord("02:28:37.2266","-07:03:38.366", unit=(u.hourangle,u.deg), frame="icrs")
+        tg = coo.SkyCoord("02:28:37.2266","-07:03:38.366", unit=(u.hourangle,u.deg), frame="icrs")
 
     if obs == "lasilla":
-        ob = coord.EarthLocation.of_site("La Silla Observatory")
+        ob = coo.EarthLocation.of_site("La Silla Observatory")
     if obs == "lascampanas":
-        ob = coord.EarthLocation.of_site("Las Campanas Observatory")
+        ob = coo.EarthLocation.of_site("Las Campanas Observatory")
     if obs == "tololo":
-        ob = coord.EarthLocation.of_site("Cerro Tololo Interamerican Observatory")
+        ob = coo.EarthLocation.of_site("Cerro Tololo Interamerican Observatory")
 
     times = time.Time(time_utc, format="jd", scale="utc", location=ob)
     ltt_bary = times.light_travel_time(tg, ephemeris="jpl")
