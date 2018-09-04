@@ -55,7 +55,7 @@ def build_txt(time,flux,error, file_name):
 def get_bjd_tdb(time_utc, target, obs):
 
     if target == "WASP19":
-        tg = coo.SkyCoord("09:53:40.007","-45:39:33.06", unit=(u.hourangle,u.deg), frame= "icrs")
+        tg = coo.SkyCoord("09:53:40.007","-45:39:33.06", unit=(u.hourangle,u.deg), frame="icrs")
     if target == "WASP18":
         tg = coo.SkyCoord("01:37:25.0332","-45:40:40.373", unit=(u.hourangle,u.deg), frame="icrs")
     if target == "WASP77":
