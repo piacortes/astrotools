@@ -5,7 +5,7 @@ import csv
 import numpy as np
 from astropy import time, coordinates as coo, units as u
 import matplotlib
-import uncertainties
+from uncertainties import unumpy
 
 def dat_to_txt(input_file):
     data = pd.read_csv(input_file, sep=" ", usecols=[0,1,2])
@@ -32,7 +32,6 @@ def get_flux(input_file, planet_name, epoch):
     while i<=num_cols:
         refs.append(unumpy.uarray(data[i],data[i+1]))
         i = i+2
-    pdb.set_trace()
     for n in range(len(refs[0])):
         items = []
         for j in range(len(refs)):
@@ -46,7 +45,7 @@ def get_flux(input_file, planet_name, epoch):
     for i in range(len(flux_vector)):
         flux.append(flux_vector[i].n)
         error.append(flux_vector[i].s)
-    np.savetxt(planet_name + "_" + epoch + ".txt", np.array([date, flux, error]).T, delimiter = " ")
+    np.savetxt(planet_name + "_" + epoch + ".txt", np.array([time, flux, error]).T, delimiter = " ")
 
 def build_txt(time,flux,error, file_name):
     fmt = "%.10f, %.10f, %.10f"
